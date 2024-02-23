@@ -144,8 +144,8 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
 
     #loop principal
-    test = True
-    while test:
+    running = True
+    while running:
 
         game = [['E', 'E', 'O'],
                 ['E', 'E', 'O'],
