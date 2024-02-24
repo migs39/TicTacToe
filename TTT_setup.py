@@ -4,7 +4,6 @@ from math import pi
 from math import floor
 
 
-
 '''gameSample:
     game = [['O', 'E', 'E'],
             ['X', 'X', 'E'],
@@ -103,11 +102,19 @@ def checkWinner(game):
         if game[2][0] == game[1][1] == game[0][2] == p:
             winner = p
             winPos = 'diagonal 2'
+        if winner == 'E': #se n tiver achado um vencedor
+            velha = True
+            #verifica se ainda existe alguma posição vazia
+            for line in game:
+                for pos in line:
+                    velha = velha and (pos != 'E')
+            if velha:
+                winner = 'V'
     return [winner, winPos]
 
 
 def drawWinLine(win, x_0, y_0, x, y, screen, color = white, width = 5):
-    if win[0] == 'E':
+    if win[0] == 'E' or win[0] == 'V':
         return True
     winPos = win[1]
     if winPos == 'diagonal 1':
@@ -128,11 +135,11 @@ def drawWinLine(win, x_0, y_0, x, y, screen, color = white, width = 5):
         lPos = lPos + (x/3)*idx #ajusta a posição para a coluna vencedora
         pygame.draw.line(screen, color, (lPos, y_0), (lPos, y_0+y), width)
         return True
-    raise ValueError('vetor de vitoia invalido')
+    raise ValueError('vetor de vitoria invalido')
 
     
 
-if __name__ == "__main__":
+def test():
     
     pygame.init()
 
@@ -145,11 +152,12 @@ if __name__ == "__main__":
 
     #loop principal
     running = True
+    
+    game = [['X', 'O', 'X'],
+            ['O', 'O', 'X'],
+            ['X', 'X', 'O']]
     while running:
 
-        game = [['E', 'E', 'O'],
-                ['E', 'E', 'O'],
-                ['E', 'E', 'O']]
 
         # tamanho do jogo da velha
         x = 700
@@ -164,11 +172,19 @@ if __name__ == "__main__":
         win = checkWinner(game)
         drawWinLine(win, x_0, y_0, x, y, screen)
         pygame.display.flip()
+        print(win[0])
+        #adiciona o evento quit
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                
         clock.tick(60)
 
-        
+
+                
     #finalizando
     pygame.quit()
     sys.exit()
 
-
+if __name__ == '__main__':
+    test()
