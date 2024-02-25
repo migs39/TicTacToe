@@ -24,7 +24,7 @@ def selectGameMode(screen, c1 = black, c2 = white):
     PvP = fontDefault.render('PVP', True, c2)
     PvE = fontDefault.render('PVE', True, c2)
     ML = fontDefault.render('Em breve...', True, c2)
-    DM = fontMini.render('Dark/Light Mode', True, c2)
+    #DM = fontMini.render('Dark/Light Mode', True, c2)
 
     #Obtendo os retângulos dos textos:
     title_rect = title.get_rect()
@@ -32,7 +32,7 @@ def selectGameMode(screen, c1 = black, c2 = white):
     PvP_rect = PvP.get_rect()
     PvE_rect = PvE.get_rect()
     ML_rect = ML.get_rect()
-    DM_rect = DM.get_rect()
+    #DM_rect = DM.get_rect()
     
     #definindo a posição de cada texto na tela:
     title_rect.center = (x//2, y//4)
@@ -50,11 +50,11 @@ def selectGameMode(screen, c1 = black, c2 = white):
     ML_button = ML_rect.inflate(x//20, y//20)
     ML_button.center = ML_rect.center
 
-    DM_button = DM_rect.inflate(x//30, y//30)
-    DM_button.bottomright = (x, y)
-    DM_rect.center = DM_button.center
+    #DM_button = DM_rect.inflate(x//30, y//30)
+    #DM_button.bottomright = (x, y)
+    #DM_rect.center = DM_button.center
     
-    buttons = [PvP_button, PvE_button, ML_button, DM_button]
+    buttons = [PvP_button, PvE_button, ML_button]#, DM_button]
 
 
     # Loop principal
@@ -78,9 +78,8 @@ def selectGameMode(screen, c1 = black, c2 = white):
                                 return PVP.PVP
                             if button == PvE_button:
                                 return 'PVE'
-                            if button == DM_button:
+                            #if button == DM_button:
                                 #return 'Dark Mode'
-                                break
                             if button == ML_button:
                                 #return ML
                                 break
@@ -95,7 +94,7 @@ def selectGameMode(screen, c1 = black, c2 = white):
         screen.blit(PvP, PvP_rect)
         screen.blit(PvE, PvE_rect)
         screen.blit(ML, ML_rect)
-        screen.blit(DM, DM_rect)
+        #screen.blit(DM, DM_rect)
 
         # Atualizando a tela
         pygame.display.flip()
